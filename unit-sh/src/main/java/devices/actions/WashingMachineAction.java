@@ -8,8 +8,10 @@ public enum WashingMachineAction {
     // Wash programs
     QUICK_WASH("Quick Wash", 40, 800),
     ECO_WASH("Eco Wash", 30, 600),
+    DELICATE_WASH("Delicate Wash", 40, 600),
     HEAVY_DUTY("Heavy Duty", 60, 1000),
-    RINSE_AND_SPIN("Rinse & Spin", 20, 1200);
+    RINSE_AND_SPIN("Rinse & Spin", 20, 1200),
+    COTTON_WASH("Cotton Wash",40 ,1000 );
 
     private final String label;
     private final int waterTempCelsius;

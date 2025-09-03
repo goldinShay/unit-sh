@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * A centralized utility for registering and navigating GUI pages using CardLayout.
@@ -14,7 +15,9 @@ public class PageNavigator {
     private static CardLayout cardLayout;           // Layout manager for switching views
 
     private static final Map<Integer, String> pageMap = new HashMap<>();      // Page number → card name
-    private static Map<Integer, JComponent> pageRegistry = new HashMap<>();
+    private static final Map<Integer, JComponent> pageRegistry = new HashMap<>(); // Page number → component
+
+    private static final Stack<Integer> history = new Stack<>();              // Navigation history
 
     private static int currentPageId = -1;
 
@@ -31,7 +34,7 @@ public class PageNavigator {
     }
 
     /**
-     * Registers a new page with a specific ID. Ignore duplicates.
+     * Registers a new page with a specific ID. Replaces if already registered.
      */
     public static void registerPage(int pageNumber, JComponent page) {
         String pageKey = "PAGE_" + pageNumber;
@@ -41,23 +44,18 @@ public class PageNavigator {
         }
 
         if (pageMap.containsKey(pageNumber)) {
-            // ✅ Replace existing page
             container.remove(pageRegistry.get(pageNumber));
-            container.add(page, pageKey);
-            pageRegistry.put(pageNumber, page);
-            System.out.println("🔁 Replaced page " + pageNumber + " with " + page.getComponentCount() + " components.");
-        } else {
-            // ✅ First-time registration
-            container.add(page, pageKey);
-            pageMap.put(pageNumber, pageKey);
-            pageRegistry.put(pageNumber, page);
-            System.out.println("📄 Registered page " + pageNumber + " with " + page.getComponentCount() + " components.");
         }
+
+        container.add(page, pageKey);
+        pageMap.put(pageNumber, pageKey);
+        pageRegistry.put(pageNumber, page);
 
         container.revalidate();
         container.repaint();
-    }
 
+//        System.out.println("📄 Registered page " + pageNumber + " with " + page.getComponentCount() + " components.");
+    }
 
     /**
      * Switches to a page by its numeric ID.
@@ -66,9 +64,15 @@ public class PageNavigator {
         String pageKey = pageMap.get(pageNumber);
         if (pageKey != null && container != null && cardLayout != null) {
             cardLayout.show(container, pageKey);
-            container.revalidate(); // ✅ Ensures layout updates
-            container.repaint();    // ✅ Forces visual refresh
+            container.revalidate();
+            container.repaint();
             currentPageId = pageNumber;
+
+            // Push to history only if it's a new page
+            if (history.isEmpty() || history.peek() != pageNumber) {
+                history.push(pageNumber);
+            }
+
             System.out.println("🔀 Switched to page " + pageNumber);
         } else {
             System.err.printf("❌ Page %d not found or PageNavigator not initialized.%n", pageNumber);
@@ -76,11 +80,16 @@ public class PageNavigator {
     }
 
     /**
-     * Registers and switches to a page in one step (useful for dynamic paging).
+     * Navigates back to the previous page in history.
      */
-    public static void loadAndGoTo(int pageNumber, JPanel page) {
-        registerPage(pageNumber, page);
-        goToPage(pageNumber);
+    public static void goBack() {
+        if (history.size() > 1) {
+            history.pop(); // Remove current
+            int previousPage = history.peek();
+            goToPage(previousPage);
+        } else {
+            System.err.println("⚠️ No previous page to go back to.");
+        }
     }
 
     /**
@@ -88,27 +97,6 @@ public class PageNavigator {
      */
     public static boolean isPageRegistered(int pageNumber) {
         return pageMap.containsKey(pageNumber);
-    }
-
-    /**
-     * Returns the number of registered pages.
-     */
-    public static int getRegisteredCount() {
-        return pageMap.size();
-    }
-
-    /**
-     * Clears all pages and resets state.
-     */
-    public static void clearPages() {
-        pageMap.clear();
-        pageRegistry.clear();
-        if (container != null) {
-            container.removeAll();
-            container.revalidate();
-            container.repaint();
-        }
-        System.out.println("🧹 PageNavigator pages cleared.");
     }
 
     /**

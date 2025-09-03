@@ -79,9 +79,9 @@ public class SmartHomeSystem {
             DeviceIdManager.getInstance().addKnownIds(sensorIds);
             AutoOpLinker.relinkLinkedDevicesToSensors(); // 🔁 restore links
             XlAutoOpManager.restoreSensorLinks();
-            for (Device device : DeviceStorage.getAllDevices().values()) {
-                System.out.println("DEBUG: " + device.getName() + " → Sensor ID: " + device.getAutomationSensorId());
-            }
+//            for (Device device : DeviceStorage.getAllDevices().values()) {
+//                System.out.println("DEBUG: " + device.getName() + " → Sensor ID: " + device.getAutomationSensorId());
+//            }
             XlTaskSchedulerManager.loadTasks();
 
             linkDevicesAndSensors();

@@ -128,21 +128,21 @@ public class AutoOpManager {
 
     // 🪄 Manual trigger if you want to rescan sensor thresholds
     public static void reevaluateAllSensors() {
-        System.out.println("🔁 Reevaluating all sensors...");
+//        System.out.println("🔁 Reevaluating all sensors...");
 
         for (Sensor sensor : SensorStorage.getSensors().values()) {
             Log.debug("🔍 Reevaluating Sensor ID: " + sensor.getSensorId() +
                     " | Ref: " + System.identityHashCode(sensor) +
                     " | Linked Devices: " + sensor.getLinkedDevice().size());
 
-            System.out.printf("🔍 Reevaluating Sensor ID: %s | Ref: %s%n",
-                    sensor.getSensorId(), System.identityHashCode(sensor));
+//            System.out.printf("🔍 Reevaluating Sensor ID: %s | Ref: %s%n",
+//                    sensor.getSensorId(), System.identityHashCode(sensor));
 
             double value = sensor.getCurrentReading();
-            int slaveCount = sensor.getLinkedDevicesCount();
+//            int slaveCount = sensor.getLinkedDevicesCount();
 
-            System.out.printf("📡 Sensor %s | Reading: %.1f | Linked Devices: %d%n",
-                    sensor.getSensorId(), value, slaveCount);
+//            System.out.printf("📡 Sensor %s | Reading: %.1f | Linked Devices: %d%n",
+//                    sensor.getSensorId(), value, slaveCount);
 
             for (Device linkedDevice : sensor.getLinkedDevice()) {
                 // ✅ Use general device registry instead of SmartLightController
@@ -152,10 +152,10 @@ public class AutoOpManager {
                     continue;
                 }
 
-                System.out.printf("   🔍 %s → AutoOp: %b | ON: %.1f | OFF: %.1f | Ref: %s%n",
-                        liveDevice.getId(), liveDevice.isAutomationEnabled(),
-                        liveDevice.getAutoThreshold(), liveDevice.getAutoThreshold(),
-                        System.identityHashCode(liveDevice));
+//                System.out.printf("   🔍 %s → AutoOp: %b | ON: %.1f | OFF: %.1f | Ref: %s%n",
+//                        liveDevice.getId(), liveDevice.isAutomationEnabled(),
+//                        liveDevice.getAutoThreshold(), liveDevice.getAutoThreshold(),
+//                        System.identityHashCode(liveDevice));
 
                 sensor.notifyLinkedDevices(value); // ✅ Use live reference
             }

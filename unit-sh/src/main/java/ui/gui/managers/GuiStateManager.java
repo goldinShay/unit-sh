@@ -29,7 +29,7 @@ public class GuiStateManager {
         Log.debug("🧩 Attempting to register device: " + id);
 
         if (deviceButtonMap.containsKey(id)) {
-            Log.warn("⚠️ Device already registered in GUI: " + id);
+//            Log.warn("⚠️ Device already registered in GUI: " + id);
             return;
         }
 
@@ -47,12 +47,12 @@ public class GuiStateManager {
         JButton button = createDeviceButton(device); // You’ll need to implement this
         deviceButtonMap.put(id, button);
 
-        Log.info("✅ " + device.getName() + " (" + id + ") added to GUI button map successfully!(GUIststeM)");
+//        Log.info("✅ " + device.getName() + " (" + id + ") added to GUI button map successfully!(GUIststeM)");
     }
 
     public static void refreshDeviceMatrix() {
         Log.debug("🔁 Refreshing device matrix...");
-        System.out.println("🧩 Matrix refreshed with devices: " + DeviceStorage.getDevices().keySet());
+//        System.out.println("🧩 Matrix refreshed with devices: " + DeviceStorage.getDevices().keySet());
 
         // ✅ Rebuild the matrix page with current memory
         ChooseLightsUpdatePage lightPage = ChooseLightsUpdatePage.loadFresh(
@@ -71,7 +71,7 @@ public class GuiStateManager {
             if (panel != null) {
                 panel.revalidate();
                 panel.repaint();
-                System.out.println("🧪 Revalidated and repainted page 120");
+//                System.out.println("🧪 Revalidated and repainted page 120");
             }
         }
     }

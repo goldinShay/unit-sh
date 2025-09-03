@@ -49,8 +49,15 @@ public class MainWindow extends JFrame {
             );
             PageNavigator.registerPage(120, lightPage);
 
+            // ✅ Rebuild page 441 with washing machine matrix
+            JComponent washerPage = ButtonMapManager.renderPageForTypes(
+                    new DeviceType[]{DeviceType.WASHING_MACHINE}, 0, 441
+            );
+            PageNavigator.registerPage(441, washerPage);
+
             PageNavigator.goToPage(120); // ✅ Show the correct page
         });
+
     }
 
     public static void launch() {

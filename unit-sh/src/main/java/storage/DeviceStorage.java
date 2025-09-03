@@ -48,7 +48,7 @@ public class DeviceStorage {
                 continue;
             }
 
-            System.out.println("🧠 Automation state for " + device.getId() + " → " + device.isAutomationEnabled());
+//            System.out.println("🧠 Automation state for " + device.getId() + " → " + device.isAutomationEnabled());
         }
 
         System.out.println("📦 Successfully loaded " + devices.size() + " devices into memory.");

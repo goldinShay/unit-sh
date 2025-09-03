@@ -66,13 +66,13 @@ public class XlAutoOpManager {
                     device.setAutomationEnabled(true);
                     device.enableAutoMode();
 
-                    Log.debug("🧬 Sensor '" + sensor.getSensorId() + "' instance hash: " + System.identityHashCode(sensor));
-                    Log.info("💡 Before link, sensor '" + sensor.getSensorId() + "' had " + sensor.getLinkedDevice().size() + " linked devices");
-
+//                    Log.debug("🧬 Sensor '" + sensor.getSensorId() + "' instance hash: " + System.identityHashCode(sensor));
+//                    Log.info("💡 Before link, sensor '" + sensor.getSensorId() + "' had " + sensor.getLinkedDevice().size() + " linked devices");
+//
                     sensor.linkLinkedDevice(device);
-
-                    Log.info("🔗 After link, sensor '" + sensor.getSensorId() + "' has " + sensor.getLinkedDevice().size() + " linked devices");
-                    Log.info("✅ Restored AutoOp link → " + device.getName() + " ← " + sensor.getSensorName());
+//
+//                    Log.info("🔗 After link, sensor '" + sensor.getSensorId() + "' has " + sensor.getLinkedDevice().size() + " linked devices");
+//                    Log.info("✅ Restored AutoOp link → " + device.getName() + " ← " + sensor.getSensorName());
                 } else {
                     Log.warn("🔍 Could not restore link for Device ID '" + linkedDeviceId + "' and Sensor ID '" + sensorId + "'");
                 }

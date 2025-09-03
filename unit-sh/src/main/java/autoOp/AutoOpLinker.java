@@ -175,7 +175,6 @@ public final class AutoOpLinker {
         }
     }
     public static void relinkLinkedDevicesToSensors() {
-        System.out.println("was here for a sec");
         Map<String, Sensor> sensors = SensorStorage.getSensors();
         Map<String, Device> devices = DeviceStorage.getDevices();
 

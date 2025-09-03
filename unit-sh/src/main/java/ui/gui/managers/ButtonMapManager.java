@@ -5,14 +5,14 @@ import devices.DeviceType;
 import devices.actions.LiveDeviceState;
 import storage.DeviceStorage;
 import ui.gui.PageNavigator;
-import utils.Theme;
 import ui.gui.guiDeviceControl.HeaterControlPage;
+import ui.gui.guiDeviceControl.WashingMachineControlPage;
+import utils.Theme;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ButtonMapManager {
@@ -30,7 +30,7 @@ public class ButtonMapManager {
         if (pageComponent != null) {
             pageComponent.revalidate();
             pageComponent.repaint();
-            System.out.println("🧪 Revalidated and repainted page " + pageId);
+//            System.out.println("🧪 Revalidated and repainted page " + pageId);
         } else {
             System.out.println("⚠️ Page " + pageId + " not found.");
         }
@@ -112,13 +112,12 @@ public class ButtonMapManager {
                         PageNavigator.registerPage(pageId, heaterPage);
                         PageNavigator.goToPage(pageId);
                     }
-
-//                    case WASHING_MACHINE -> {
-//                        int pageId = 431 + position;
-//                        JPanel washerPage = new WasherControlPage(device, pageId);
-//                        PageNavigator.registerPage(pageId, washerPage);
-//                        PageNavigator.goToPage(pageId);
-//                    }
+                    case WASHING_MACHINE -> {
+                        int pageId = 441 + position;
+                        JPanel washerPage = new WashingMachineControlPage(device, pageId);
+                        PageNavigator.registerPage(pageId, washerPage);
+                        PageNavigator.goToPage(pageId);
+                    }
 //
 //                    case DRYER -> {
 //                        int pageId = 441 + position;

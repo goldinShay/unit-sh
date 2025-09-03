@@ -65,7 +65,7 @@ public abstract class Sensor implements Runnable {
 
     // ─── 📡 Automation ───
     public void notifyLinkedDevices(double value) {
-        System.out.println("🔔 Notifying " + linkedDevices.size() + " linked devices");
+//        System.out.println("🔔 Notifying " + linkedDevices.size() + " linked devices");
 
         for (Device device : linkedDevices) {
             if (!device.isAutomationEnabled()) continue;

@@ -118,7 +118,7 @@ public class XlDeviceManager {
                         LiveDeviceState.turnOff(device);
                     }
 
-                    Log.info("✅ Loaded & registered device: " + device.getId() + " (" + device.getType() + ")");
+//                    Log.info("✅ Loaded & registered device: " + device.getId() + " (" + device.getType() + ")");
 
                 } catch (Exception ex) {
                     Log.warn("🚫 Failed to parse row " + rowIndex + ": " + ex.getMessage());
